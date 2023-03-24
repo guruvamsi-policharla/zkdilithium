@@ -1,0 +1,20 @@
+[package]
+name = "zk_dilithium"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+concurrent = ["winterfell/concurrent", "std"]
+default = ["std"]
+std = ["hex/std", "winterfell/std"]
+
+[dependencies]
+winterfell = {git = "https://github.com/bwesterb/winterfell", branch = "f23"}
+winter-utils = "0.4.0"
+winter-rand-utils = "0.4.0"
+hex = { version = "0.4.3", optional = true }
+log = { version = "0.4", default-features = false }
+blake3 = { version = "1.0", default-features = false }
+env_logger = { version = "0.9", default-features = false }
+generic_singleton = "0.4.1"
+atomic_refcell = "0.1.9"
