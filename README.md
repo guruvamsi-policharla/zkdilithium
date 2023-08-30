@@ -1,4 +1,4 @@
-# Post-Quantum Anonymous Credentials [ePrint:2023/414](https://eprint.iacr.org/2023/414)
+# zkdilithium: Post-Quantum Anonymous Credentials [ePrint:2023/414](https://eprint.iacr.org/2023/414)
 
 Rust implementation of the zkDilithium based anonymous credential scheme introduced in [ePrint:2023/414](https://eprint.iacr.org/2023/414)/
 
