@@ -80,7 +80,7 @@ impl Air for ThinDilAir {
         main_degrees.append(&mut vec![TransitionConstraintDegree::with_cycles(1, vec![PADDED_TRACE_LENGTH]); 2]); //QASSERT (Assertion for rangeproof)
         main_degrees.append(&mut vec![TransitionConstraintDegree::with_cycles(1, vec![PADDED_TRACE_LENGTH]); 2]); //RASSERT (Assertion for rangeproof)
 
-        main_degrees.push(TransitionConstraintDegree::with_cycles(2, vec![PADDED_TRACE_LENGTH])); //SWAPASSERT
+        main_degrees.push(TransitionConstraintDegree::with_cycles(3, vec![PADDED_TRACE_LENGTH])); //SWAPASSERT
         main_degrees.push(TransitionConstraintDegree::with_cycles(2, vec![PADDED_TRACE_LENGTH])); //NEGASSERT
         
         main_degrees.append(&mut vec![TransitionConstraintDegree::with_cycles(1, vec![PADDED_TRACE_LENGTH]);2]); //SWAPDECASSERT
@@ -342,11 +342,13 @@ impl Air for ThinDilAir {
         result.agg_constraint(SWAPDECASSERT+1, qrdec_flag, lhs - E::ONE);
 
         lhs = E::ZERO;
+        let mut s_location = E::ZERO;
         for i in 0..N{
+            s_location += E::from(i as u32)*s[i];
             lhs += next[SWAPDECIND+i]*current[CIND+i];
             rhs += s[i]*next[CIND+i];
         }
-        result.agg_constraint(SWAPASSERT, qrdec_flag, lhs-rhs);
+        result.agg_constraint(SWAPASSERT, qrdec_flag, (next[RIND] - s_location)*(lhs-rhs));
 
         lhs = E::ZERO;
         // rhs = E::ZERO;
